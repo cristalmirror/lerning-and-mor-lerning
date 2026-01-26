@@ -2,8 +2,9 @@
 using namespace std;
 extern "C" {
     void saludar(); // Replace with actual C library header
-    int sumar(int a, int b); // Declaration of the C function(Rust function)
-    int loop_func();
+    void despedir();
+    int sumar(int a, int b); // Declaration of the Rust function
+    void loop_func();
 }
 
 int main() {
@@ -11,5 +12,6 @@ int main() {
     int res = sumar(5, 7); // Call the Rust function
     cout << "Resultado de sumar desde Rust: " << res <<endl <<endl;
     loop_func();
+    despedir(); // Call the C function
     return 0;
 }
