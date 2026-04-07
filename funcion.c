@@ -25,7 +25,11 @@ void despedir() {
 
 //option to process the degree form of input args
 void degree_option(char ***element) {
+    printf("Degree option runing now...\n");
+}
 
+void matrix_option(char ***element) {
+    printf("Matix option runing now...\n");
 }
 
 /*theory of graphes*/
