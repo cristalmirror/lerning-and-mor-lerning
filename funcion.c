@@ -5,8 +5,8 @@
 
 /*vertex*/
 struct vertex {
-    struct vertex *next;
-    char *edge;
+    struct vertex **edge; //this pointer is a representation of a edge
+    char *vertex_name; //name of vertex type data
 };
 
 
@@ -23,10 +23,15 @@ void despedir() {
     printf("Adios a todos desde C, este ingerto de lenguajes los quiere\n\n");
 }
 
+//option to process the degree form of input args
+void degree_option(char ***element) {
+
+}
 
 /*theory of graphes*/
-void graph_function(char **data_graph) {
+void graph_function(char **data_graph, char **opt_graph) {
     printf("GRAPH FUNCTION RUN\n");
+    printf("G=(V;A;\u03C6)\n");
     char text[]= "texto partido en partes con C";
 
     //checking the repherense is NULL or not to charger the text
@@ -34,15 +39,15 @@ void graph_function(char **data_graph) {
         strcpy(text, *data_graph);
     }
 
-    char *token = strtok(text,"_");
+    char *token = strtok(text,",");
     while (token) {
         printf("%s\n",token);
-        token = strtok(NULL,"_");
+        token = strtok(NULL,",");
     }
     
 }
 
-void digraph_function(char **data_graph) {
+void digraph_function(char **data_graph, char **opt_graph) {
     printf("DIGRAPH FUNCTION RUN\n");
     char text[]= "texto partido en partes con C";
 
@@ -51,14 +56,14 @@ void digraph_function(char **data_graph) {
         strcpy(text, *data_graph);
     }
 
-    char *token = strtok(text,"_");
+    char *token = strtok(text,",");
     while (token) {
         printf("%s\n",token);
-        token = strtok(NULL,"_");
+        token = strtok(NULL,",");
     }
 }
 
-void tree_function(char **data_graph) {
+void tree_function(char **data_graph, char **opt_graph) {
     printf("TREE FUNCTION RUN\n");
     char text[]= "texto partido en partes con C";
 
@@ -67,9 +72,9 @@ void tree_function(char **data_graph) {
         strcpy(text, *data_graph);
     }
 
-    char *token = strtok(text,"_");
+    char *token = strtok(text,",");
     while (token) {
         printf("%s\n",token);
-        token = strtok(NULL,"_");
+        token = strtok(NULL,",");
     }
 }
