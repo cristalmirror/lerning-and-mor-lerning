@@ -51,7 +51,7 @@ void construction_GDT(struct vertex **v) {
 
 /*theory of graphes*/
 void graph_function(char **data_graph) {
-    int tam[2];
+    int tam[2];//matrix size (vertex*edges)
     printf("GRAPH FUNCTION RUN\n");
     printf("G=(V;A;\u03C6)\n");
     char text[]= "texto partido en partes con C";
@@ -68,12 +68,15 @@ void graph_function(char **data_graph) {
         tam[i] = atom(token[i]);
     }
 
-    while (token) {       
-        token = strtok(NULL,"[");//delete this simbol
-        token = strtok(NULL,"]");//delete this simbol
-        
-        printf("%s\n",token);
-        token = strtok(NULL,",");
+    //define matrix model
+    char matrix[tam[0]][tam[1]];
+
+    char *vertex_char = strtok(token,"[");//delete this simbol
+    for (int j = 0; j < tam[1]; j++) {       
+        for(int i = 0; i < tam[0]; i++) {
+            matrix[i][j] = vertex_char;
+            vertex_char = strtok(NULL,",");
+        }
     }
     
 }
