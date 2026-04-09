@@ -32,8 +32,25 @@ void matrix_option(char ***element) {
     printf("Matix option runing now...\n");
 }
 
+/*
+    To create the graphes, digraphes or trees,
+    this code using linked list method, each vertex
+    has interlinked to pointers simulating the edges(the ponters are the edges)
+*/
+
+//init element vertex
+void init_struct_GDT(struct vertex **v) {
+    *v = 0;
+}
+
+/*crete the struct that the matrix represent*/
+void construction_GDT(struct vertex **v) {
+    struct vertex *aux;
+    struct vertex *act = (struct vertex *)malloc(sizeof(struct vertex));    
+}
+
 /*theory of graphes*/
-void graph_function(char **data_graph, char **opt_graph) {
+void graph_function(char **data_graph) {
     printf("GRAPH FUNCTION RUN\n");
     printf("G=(V;A;\u03C6)\n");
     char text[]= "texto partido en partes con C";
@@ -51,7 +68,8 @@ void graph_function(char **data_graph, char **opt_graph) {
     
 }
 
-void digraph_function(char **data_graph, char **opt_graph) {
+//digraph_operation
+void digraph_function(char **data_graph) {
     printf("DIGRAPH FUNCTION RUN\n");
     char text[]= "texto partido en partes con C";
 
@@ -67,7 +85,7 @@ void digraph_function(char **data_graph, char **opt_graph) {
     }
 }
 
-void tree_function(char **data_graph, char **opt_graph) {
+void tree_function(char **data_graph) {
     printf("TREE FUNCTION RUN\n");
     char text[]= "texto partido en partes con C";
 
