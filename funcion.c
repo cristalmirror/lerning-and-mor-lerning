@@ -104,6 +104,16 @@ void graph_function(char **data_graph) {
         }
         printf("\n");
     }
+
+    //make the tree with matrix data
+    for (int i = 0; i < f; i++) {
+        for (int j = 0; j < c; j++) {
+            /* code */
+        }
+        
+    }
+    
+
     for (int i = 0; i < f; i++) free(matrix[i]);
     free(matrix);
     free(text);
