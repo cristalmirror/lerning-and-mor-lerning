@@ -51,7 +51,7 @@ void construction_GDT(struct vertex **v) {
 
 /*theory of graphes*/
 void graph_function(char **data_graph) {
-    int tam[2];//matrix size (vertex*edges)
+    int f,c;//matrix size (vertex*edges)
     printf("GRAPH FUNCTION RUN\n");
     printf("G=(V;A;\u03C6)\n");
     char *text = malloc(30 * sizeof(char)); 
@@ -71,30 +71,42 @@ void graph_function(char **data_graph) {
         information that is necesary to 
         crete the matix
     */
-    char *firts_tokens = strtok(text,"x");
-    for (int i = 0; i < 2; i++) {
-        tam[i] = atoi(firts_tokens);
-        firts_tokens = strtok(NULL,"_");
-    }
+    char *first_tokens = strtok(text,"x");
+    if (first_tokens) f = atoi(first_tokens);
+
+    first_tokens = strtok(NULL,"_");
+    if (first_tokens) c = atoi(first_tokens);
+    
 
     //define matrix model
-    char **matrix;
-    //init (heap memory assignations)
-    matrix = (char **)malloc(sizeof(firts_tokens));
-    for (int i = 0; i < tam[1]; i++) matrix[i] = (char *)malloc(tam[4] * sizeof(char));
-    *matrix="*";
-    char *vertex_char = strtok(text,"[");//delete this simbol
-    vertex_char = strtok(NULL,",");
-    for (int j = 0; j < tam[1]; j++) {       
-        for(int i = 0; i < tam[0]; i++) {
+    // reserv memory to the rows pointers 
+    char **matrix = (char**)malloc(f * sizeof(char *));
+    //and now doing the same to the cols pointers
+    for (int i = 0; i < f; i++) {
+        matrix[i] = (char*)malloc(c * sizeof(char));
+    } 
+    
+
+    char *vertex_char = strtok(NULL,",");//delete this simbol
+    /*
+        remove the residual char '['
+        next load values in the matrix tipe
+        to use how map
+    */
+    memmove(vertex_char, vertex_char + 1, strlen(vertex_char));
+    for (int j = 0; j < f; j++) {       
+        for(int i = 0; i < c; i++) {
             if (vertex_char != NULL) {
-                matrix[i][j] = *vertex_char; 
+                matrix[i][j] = vertex_char[0]; 
             } 
-            printf("%s,",vertex_char);
+            printf("%s ,",vertex_char);
             vertex_char = strtok(NULL,",");
         }
         printf("\n");
     }
+    for (int i = 0; i < f; i++) free(matrix[i]);
+    free(matrix);
+    free(text);
 }
 
 //digraph_operation
