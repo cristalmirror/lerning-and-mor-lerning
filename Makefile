@@ -15,8 +15,18 @@ RS_LIB = src/librust_part.a
 C_OBJ = funcion.o
 CPP_OBJ = main.o
 
+#debug options
+.PHONY: debug
+debug: CFLAGS += -g
+debug: CXXFLAGS += -g
+debug: RUST_FLAGS += -g
+debug: $(TARGET)
+
+
 # executable definitions
 all: $(TARGET)
+
+
 
 #linking code
 $(TARGET): $(CPP_OBJ) $(C_OBJ) $(RS_LIB)

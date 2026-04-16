@@ -78,13 +78,18 @@ void graph_function(char **data_graph) {
     }
 
     //define matrix model
-    char matrix[tam[0]][tam[1]];
-
+    char **matrix;
+    //init (heap memory assignations)
+    matrix = (char **)malloc(sizeof(firts_tokens));
+    for (int i = 0; i < tam[1]; i++) matrix[i] = (char *)malloc(tam[4] * sizeof(char));
+    *matrix="*";
     char *vertex_char = strtok(text,"[");//delete this simbol
     vertex_char = strtok(NULL,",");
     for (int j = 0; j < tam[1]; j++) {       
         for(int i = 0; i < tam[0]; i++) {
-            matrix[i][j] = *vertex_char;
+            if (vertex_char != NULL) {
+                matrix[i][j] = *vertex_char; 
+            } 
             printf("%s,",vertex_char);
             vertex_char = strtok(NULL,",");
         }
