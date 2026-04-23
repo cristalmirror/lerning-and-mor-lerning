@@ -1,28 +1,38 @@
 # Changelog
 
-El formato está basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.0/),
-y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
+This software has creted with educative objetives, Is a simple software to understend the interations the graphes, digraphes and trees, 
+also is my practice to  Decoupled Software Architecture, and SOLID principes, these form i practice 3 university subjects both,
 
+Part of this code is maked usin claude and C/C++/Rust documentations of the next fonts:
+- https://www.c-language.org/
+- https://cppreference.com/
+- https://www.w3schools.com/cpp/default.asp
+- https://doc.rust-lang.org/book/
+- https://cplusplus.com/doc/tutorial/
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/es/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/lang/es/).
 ---
 
 ## [Unreleased]
 ### Added
-- creacion de los elementos Nodo y vertices en forma de lista
-- crear un motor grafico que imprima el resultado grafico en la terminal
+- Creating the Node and Vertex elements as a list
+- Creating a graphics engine that prints the graphical result to the terminal
 
 ## [0.0.1] - 2026-04-23
 ### Added
-- Estructura inicial del proyecto
-- `funcion.c` con funciones `graph_function`, `digraph_function`, `tree_function`
-- Soporte básico para grafos, digrafos y árboles mediante listas enlazadas
-- Funciones `saludar` y `despedir` para pruebas iniciales
+- Initial project structure
+- `function.c` with `graph_function`, `digraph_function`, and `tree_function` functions
+- Basic support for graphs, digraphs, and trees using linked lists
+- `greet` and `goodbye` functions for initial testing
 
 ---
 
-## Tipos de cambios
-- `Added`   — funcionalidad nueva
-- `Changed` — cambios en funcionalidad existente
-- `Deprecated` — funcionalidad que será eliminada
-- `Removed` — funcionalidad eliminada
-- `Fixed`   — corrección de bugs
-- `Security` — corrección de vulnerabilidades
+
+## Types of Changes
+- `Added` — new functionality
+- `Changed` — changes to existing functionality
+- `Deprecated` — functionality to be removed
+- `Removed` — functionality removed
+- `Fixed` — bug fixes
+- `Security` — vulnerability fixes
