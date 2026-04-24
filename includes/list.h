@@ -21,4 +21,4 @@ struct vertex {
 //init element vertex
 void init_struct_GDT(struct vertex **v);
 /*crete the struct that the matrix represent*/
-void construction_GDT(struct vertex **v);
+void construction_GDT(struct vertex **v, char ***matrix, int file, int colums);

@@ -2,9 +2,9 @@
 #include <stdlib.h>
 
 void init_struct_GDT(struct vertex **v) {
-    *v = 0;
+    *v = NULL;
 }
 
-void construction_GDT(struct vertex **v) {
+void construction_GDT(struct vertex **v, char ***matrix,int file, int colums) {
     struct vertex *act = (struct vertex *)malloc(sizeof(struct vertex));
 }

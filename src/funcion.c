@@ -26,7 +26,27 @@ void matrix_option(char ***element) {
     printf("Matix option runing now...\n");
 }
 
-
+/*
+    these procediment check the the matix
+    is valid and have correct relations
+    vertex/edge
+ */
+int check_matix_validation(char ***element, int file, int colums) {
+    for(int i = 0; i < file; i++) {
+        int count = 0;
+        for(int j = 0; j < colums; j++) {
+            if (*element[i][j] == '1') {
+                count++;
+                if (count >= 3) {
+                    printf("La matriz no es valida\n");
+                    return -1;
+                } 
+            } 
+        }
+    }
+    printf("La matriz es valida\n");
+    return 0;
+}
 
 /*theory of graphes*/
 void graph_function(char **data_graph) {
@@ -73,8 +93,8 @@ void graph_function(char **data_graph) {
         to use how map
     */
     memmove(vertex_char, vertex_char + 1, strlen(vertex_char));
-    for (int j = 0; j < f; j++) {       
-        for(int i = 0; i < c; i++) {
+    for (int i = 0; i < f; i++) {       
+        for(int j = 0; j < c; j++) {
             if (vertex_char != NULL) {
                 matrix[i][j] = vertex_char[0]; 
             } 
@@ -84,14 +104,15 @@ void graph_function(char **data_graph) {
         printf("\n");
     }
 
-    //make the tree with matrix data
-    for (int i = 0; i < f; i++) {
-        for (int j = 0; j < c; j++) {
-            /* code */
-        }
-        
+    //check the matix is valid 
+    if(check_matix_validation(&matrix,f,c) == -1) { 
+        exit(1); 
+    } else {//if is valid make the graphe
+        struct vertex vert;
+        init_struct_GDT(&vert);
+        construction_GDT(&vert,&matrix,f,c);
     }
-    
+
 
     for (int i = 0; i < f; i++) free(matrix[i]);
     free(matrix);
