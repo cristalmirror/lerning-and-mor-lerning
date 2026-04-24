@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include<unistd.h>
-#include"../includes/list.h"
+#include"../includes/linker.h"
 
 void saludar() {
     printf("¡Hola desde la función C!\n");
