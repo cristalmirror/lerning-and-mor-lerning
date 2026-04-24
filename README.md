@@ -2,7 +2,7 @@
 
 -Is a software that allow represent examples of theory of graphs using commands line, this software is my personal proyect to practice 
 the SOLID software arquitecture, at the same lern more about SemVer and Changelog.
-##Compilation:
+## Compilation:
 ```bash
 make 
 ```
