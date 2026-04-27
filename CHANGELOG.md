@@ -16,8 +16,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/es/).
 
 ## [Unreleased]
 ### Added
-- Creating the Node and Vertex elements as a list
 - Creating a graphics engine that prints the graphical result to the terminal
+
+## [0.0.3] - 2026-04-26
+### Added
+- Creating the Node and Vertex elements as a list (not found now).
+
+### Change
+- the main funcion, has modify and the system arguments too
+
 
 ## [0.0.2] - 2026-04-24
 
