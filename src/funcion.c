@@ -35,7 +35,14 @@ int check_matix_validation(char ***element, int file, int colums) {
     for(int i = 0; i < file; i++) {
         int count = 0;
         for(int j = 0; j < colums; j++) {
-            if (*element[i][j] == '1') {
+            if ((*element)[i][j] == '1') {
+                /*
+                    C logic explaining:
+                    element char*** → pointer to the matrix pointer 
+                    *element char** → the real matrix 
+                    (*element)[i] char* → file i 
+                    (*element)[i][j] char → cell [i][j]
+                */
                 count++;
                 if (count >= 3) {
                     printf("La matriz no es valida\n");
@@ -111,6 +118,7 @@ void graph_function(char **data_graph) {
         struct vertex *vert;
         init_struct_GDT(&vert);
         construction_GDT(&vert,&matrix,f,c);
+        printing_GDT(&vert);
     }
 
 

@@ -14,7 +14,8 @@
 
 /*vertex*/
 struct vertex {
-    struct vertex **edge; //this pointer is a representation of a edge
+    struct vertex **edge;
+     //this pointer is a representation of a edge
     char *vertex_name; //name of vertex type data
 };
 
@@ -22,3 +23,5 @@ struct vertex {
 void init_struct_GDT(struct vertex **v);
 /*crete the struct that the matrix represent*/
 void construction_GDT(struct vertex **v, char ***matrix, int file, int colums);
+/*printing vertex*/
+void printing_GDT(struct vertex **v);
