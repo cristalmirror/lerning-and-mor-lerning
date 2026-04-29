@@ -31,12 +31,14 @@ void construction_GDT(struct vertex ***v, int * size, char ***matrix, int file, 
 
     //connection for colums (edges)
     for (int j = 0; j < colums; j++) {
-        int p[2],count = -1;
+        int p[2],count = 0;
         //whats vertex is part of the edge
         for (int i = 0; i < file; i++) {
+            char val = (*matrix)[i][j];
+            printf("  matrix[%d][%d]=%c=%d\n", i, j, val, val);
             if((*matrix)[i][j] == '1') {
                 p[count] = i;
-                count++;
+                if (count <1) count++;//correction to don't generate memory overflow and 
             }
         }
        
@@ -65,10 +67,17 @@ void construction_GDT(struct vertex ***v, int * size, char ***matrix, int file, 
 }
 
 void printing_GDT(struct vertex **v, int size) {
+
+    if (v == NULL) return;//base validation
+
     for (int i = 0; i < size; i++) {
+        if (v[i] == NULL || v[i]->vertex_name == NULL) continue;
+
         printf("(%s) → ",v[i]->vertex_name);
         for (int j = 0; j < v[i]->edge_count; j++) {
-            printf("(%s) ", v[i]->edge[j]->vertex_name);
+
+            if (v[i]->edge[j] != NULL || v[i]->edge[j]->vertex_name != NULL) printf("(%s) ", v[i]->edge[j]->vertex_name);
+            else printf("(error_prt) ");
         }
         printf("\n");
     }
