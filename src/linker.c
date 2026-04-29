@@ -27,9 +27,11 @@ void construction_GDT(struct vertex ***v, int * size, char ***matrix, int file, 
         aux[i]->edge = malloc(count *sizeof(struct vertex*));
     }
     int pos[file];// array of independent position
+    for (int i = 0; i < file; i++) pos[i] = 0;
+
     //connection for colums (edges)
     for (int j = 0; j < colums; j++) {
-        int p[2],count = 0;
+        int p[2],count = -1;
         //whats vertex is part of the edge
         for (int i = 0; i < file; i++) {
             if((*matrix)[i][j] == '1') {
@@ -40,7 +42,7 @@ void construction_GDT(struct vertex ***v, int * size, char ***matrix, int file, 
        
         // antes del if — imprime siempre
         printf("j=%d count=%d\n", j, count);
-        for (int x = 0; x < count; x++) {
+        for (int x = 0; x <= count; x++) {
             printf("  p[%d]=%d\n", x, p[x]);
         }
 

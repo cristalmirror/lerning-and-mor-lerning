@@ -32,9 +32,9 @@ void matrix_option(char ***element) {
     vertex/edge
  */
 int check_matix_validation(char ***element, int file, int colums) {
-    for(int i = 0; i < file; i++) {
+    for(int j = 0; j < colums; j++) {
         int count = 0;
-        for(int j = 0; j < colums; j++) {
+        for(int i = 0; i< file; i++) {
             if ((*element)[i][j] == '1') {
                 /*
                     C logic explaining:
