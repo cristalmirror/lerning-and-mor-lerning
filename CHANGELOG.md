@@ -17,6 +17,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/es/).
 ## [Unreleased]
 ### Added
 - Creating a graphics engine that prints the graphical result to the terminal
+
+## [0.0.5] - 2026-05-1
+
+### Change
+- Littel modify of `linker.c` to fixed errors and problems of logics
+
+### Fixed
 - Fix this error:
 - ```c
   j=0 count=3

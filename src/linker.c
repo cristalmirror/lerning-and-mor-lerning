@@ -1,5 +1,7 @@
 #include "../includes/linker.h"
+#include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 void init_struct_GDT(struct vertex ***v) {
     *v = NULL;
@@ -16,7 +18,7 @@ void construction_GDT(struct vertex ***v, int * size, char ***matrix, int file, 
         aux[i]->edge=NULL;
         aux[i]->edge_count = 0;
     }
-
+    
     //count edge for each vertex
     for (int i = 0; i < file; i++) {
         int count = 0;
@@ -75,9 +77,11 @@ void printing_GDT(struct vertex **v, int size) {
 
         printf("(%s) → ",v[i]->vertex_name);
         for (int j = 0; j < v[i]->edge_count; j++) {
-
-            if (v[i]->edge[j] != NULL || v[i]->edge[j]->vertex_name != NULL) printf("(%s) ", v[i]->edge[j]->vertex_name);
-            else printf("(error_prt) ");
+            if (v[i]->edge[j] != NULL && v[i]->edge[j]->vertex_name != NULL) {
+                printf("(%s) ", v[i]->edge[j]->vertex_name);
+            } else {
+                printf("(error_prt)\n");
+            }
         }
         printf("\n");
     }
