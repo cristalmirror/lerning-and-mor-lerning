@@ -39,8 +39,8 @@ void construction_GDT(struct vertex ***v, int * size, char ***matrix, int file, 
             char val = (*matrix)[i][j];
             printf("  matrix[%d][%d]=%c=%d\n", i, j, val, val);
             if((*matrix)[i][j] == '1') {
-                p[count] = i;
-                if (count <1) count++;//correction to don't generate memory overflow and 
+                if (count <2) p[count] = i;
+                count++;//correction to don't generate memory overflow and 
             }
         }
        
@@ -62,10 +62,9 @@ void construction_GDT(struct vertex ***v, int * size, char ***matrix, int file, 
             pos[p[0]]++; 
             pos[p[1]]++; 
         }
-        *v = aux;
-        *size = file;
     }
-    
+    *v = aux;
+    *size = file;
 }
 
 void printing_GDT(struct vertex **v, int size) {
