@@ -23,7 +23,7 @@ void construction_GDT(struct vertex ***v, int * size, char ***matrix, int file, 
     for (int i = 0; i < file; i++) {
         int count = 0;
         for (int j = 0; j < colums; j++) {
-            if ((*matrix)[i][j]) count++;
+            if ((*matrix)[i][j] == '1') count++;
         }
         aux[i]->edge_count = count;
         aux[i]->edge = malloc(count *sizeof(struct vertex*));
@@ -46,7 +46,7 @@ void construction_GDT(struct vertex ***v, int * size, char ***matrix, int file, 
        
         // antes del if — imprime siempre
         printf("j=%d count=%d\n", j, count);
-        for (int x = 0; x <= count; x++) {
+        for (int x = 0; x < count; x++) {
             printf("  p[%d]=%d\n", x, p[x]);
         }
 
@@ -73,7 +73,6 @@ void printing_GDT(struct vertex **v, int size) {
 
     for (int i = 0; i < size; i++) {
         if (v[i] == NULL || v[i]->vertex_name == NULL) continue;
-
         printf("(%s) → ",v[i]->vertex_name);
         for (int j = 0; j < v[i]->edge_count; j++) {
             if (v[i]->edge[j] != NULL && v[i]->edge[j]->vertex_name != NULL) {
@@ -84,4 +83,20 @@ void printing_GDT(struct vertex **v, int size) {
         }
         printf("\n");
     }
+}
+
+
+
+void close_GDT(struct vertex ***v, int size) {
+
+    if (*v == NULL) return;
+
+    for (int i =0; i < size; i++) {
+        if ((*v)[i] == NULL) continue;
+        free((*v)[i]->vertex_name);
+        free((*v)[i]->edge);
+        free((*v)[i]);
+    }
+    free(*v);
+    *v = NULL;
 }

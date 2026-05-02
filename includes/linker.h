@@ -27,3 +27,5 @@ void init_struct_GDT(struct vertex ***v);
 void construction_GDT(struct vertex ***v, int *size, char ***matrix, int file, int colums);
 /*printing vertex*/
 void printing_GDT(struct vertex **v, int size);
+
+void close_GDT(struct vertex ***v, int size);

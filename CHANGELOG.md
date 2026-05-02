@@ -17,10 +17,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/es/).
 ## [Unreleased]
 ### Added
 - Creating a graphics engine that prints the graphical result to the terminal
+## [0.0.6]
+
+### Added
+- Has created the operation `close_DTG();` ins tehe `linker.h` and `linker.c` for free
+memory allocations of the graphes.
+### Changed
+- Has modify the opertions in makefile to optimize the executable archive, in last vercions 13MB now 3,6MB.
+
+### Fixed
+
+- Has fixed the logical error to print vertex, now the vertex pointers has printed correctly
 
 ## [0.0.5] - 2026-05-1
 
-### Change
+### Changed
 - Littel modify of `linker.c` to fixed errors and problems of logics
 
 ### Fixed
@@ -47,7 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/es/).
 ### Added
 - Creating the Node and Vertex elements as a list (not found now).
 
-### Change
+### Changed
 - the main funcion, has modify and the system arguments too
 
 

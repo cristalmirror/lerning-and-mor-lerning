@@ -57,7 +57,7 @@ int check_matix_validation(char ***element, int file, int colums) {
 
 /*theory of graphes*/
 void graph_function(char **data_graph) {
-    int f,c;//matrix size (vertex*edges)
+    int f = 0,c = 0;//matrix size (vertex*edges)
     printf("GRAPH FUNCTION RUN\n");
     printf("G=(V;A;\u03C6)\n");
     char *text = malloc(30 * sizeof(char)); 
@@ -112,20 +112,24 @@ void graph_function(char **data_graph) {
     }
 
     //check the matix is valid 
-    if(check_matix_validation(&matrix,f,c) == -1) { 
+    if(check_matix_validation(&matrix,f,c) == -1) {
+        free(matrix);
+        free(text);
         exit(1); 
     } else {//if is valid make the graphe
         struct vertex **vert;
         int size = 0;
         init_struct_GDT(&vert);
         construction_GDT(&vert,&size,&matrix,f,c);
-        printing_GDT(vert,size);
+        printing_GDT(vert, size);
+        close_GDT(&vert,size);//free memory
     }
 
 
     for (int i = 0; i < f; i++) free(matrix[i]);
     free(matrix);
     free(text);
+    
 }
 
 //digraph_operation
