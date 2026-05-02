@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/es/).
 ## [0.0.6]
 
 ### Added
-- Has created the operation `close_DTG();` ins tehe `linker.h` and `linker.c` for free
+- Has created the operation `close_GDT();` ins tehe `linker.h` and `linker.c` for free
 memory allocations of the graphes.
 ### Changed
 - Has modify the opertions in makefile to optimize the executable archive, in last vercions 13MB now 3,6MB.
