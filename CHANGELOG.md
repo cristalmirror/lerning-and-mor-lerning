@@ -17,6 +17,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/es/).
 ## [Unreleased]
 ### Added
 - Creating a graphics engine that prints the graphical result to the terminal
+## [0.0.7] - 2026-05-09
+### Added
+- include `make_graphes.h` and `make_graphes.c` but not running 
+
+
 ## [0.0.6]
 
 ### Added
