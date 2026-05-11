@@ -1,3 +1,10 @@
+
+ifeq ($(OS), Windows_NT)
+	LIBS = -lbgi -lgdi32
+else
+	LIBS = -lncurses -lm
+endif
+
 #compilers
 CC = gcc
 CXX = g++
@@ -26,7 +33,7 @@ LINK_OBJ = ./output/linker.o
 all: clean $(TARGET)
 
 $(TARGET): $(CPP_OBJ) $(C_OBJ) $(LINK_OBJ) $(RS_LIB)
-	$(CXX) $(CPP_OBJ) $(C_OBJ) $(LINK_OBJ) $(RS_LIB) -o $(TARGET) $(LDFLAGS)
+	$(CXX) $(CPP_OBJ) $(C_OBJ) $(LINK_OBJ) $(RS_LIB) -o $(TARGET) $(LDFLAGS) $(LIBS)
 
 $(RS_LIB): $(RS_SRC)
 	cargo build --release
@@ -43,12 +50,10 @@ $(CPP_OBJ): src/main.cpp
 
 # ─── DEBUG ─────────────────────────────────────────────
 .PHONY: debug
-debug: clean \
-	$(RS_LIB_DBG) \
-	$(LINK_OBJ) \
-	$(C_OBJ) \
-	$(CPP_OBJ)
-	$(CXX) $(CPP_OBJ) $(C_OBJ) $(LINK_OBJ) $(RS_LIB_DBG) -o $(TARGET) $(LDFLAGS)
+debug: CFLAGS := $(CFLAGS_DBG)
+debug: CXXFLAGS := $(CXXFLAGS_DBG)
+debug: clean $(RS_LIB_DBG) $(LINK_OBJ) $(C_OBJ) $(CPP_OBJ)
+	$(CXX) $(CPP_OBJ) $(C_OBJ) $(LINK_OBJ) $(RS_LIB_DBG) -o $(TARGET) $(LDFLAGS) $(LIBS)
 
 $(RS_LIB_DBG): $(RS_SRC)
 	cargo build
