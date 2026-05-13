@@ -15,8 +15,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/es/).
 ---
 
 ## [Unreleased]
+- Implement the graphics header and running fine
+
+### [0.0.8] - 2026-05-11
 ### Added
 - Creating a graphics engine that prints the graphical result to the terminal
+### 
+
+## [0.0.7] - 2026-05-09
+
+### Added
+- Include `make_graphes.h` and `make_graphes.c` but not running 
+
+### Changed
+- Makefile has modify to compile `make_graphes.h` and `make_graphes.c` 
+
 ## [0.0.6]
 
 ### Added

@@ -1,4 +1,5 @@
-#pragma once 
+#pragma once
+#include "../includes/make_graph.h"
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -29,3 +30,5 @@ void construction_GDT(struct vertex ***v, int *size, char ***matrix, int file, i
 void printing_GDT(struct vertex **v, int size);
 
 void close_GDT(struct vertex ***v, int size);
+
+void draw_GDT(struct vertex **v, int size);

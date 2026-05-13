@@ -1,4 +1,6 @@
 #include "../includes/linker.h"
+#include "../includes/make_graph.h"
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -36,18 +38,10 @@ void construction_GDT(struct vertex ***v, int * size, char ***matrix, int file, 
         int p[2],count = 0;
         //whats vertex is part of the edge
         for (int i = 0; i < file; i++) {
-            char val = (*matrix)[i][j];
-            printf("  matrix[%d][%d]=%c=%d\n", i, j, val, val);
             if((*matrix)[i][j] == '1') {
                 if (count <2) p[count] = i;
                 count++;//correction to don't generate memory overflow and 
             }
-        }
-       
-        // antes del if — imprime siempre
-        printf("j=%d count=%d\n", j, count);
-        for (int x = 0; x < count; x++) {
-            printf("  p[%d]=%d\n", x, p[x]);
         }
 
         if (count == 1) {
@@ -99,4 +93,38 @@ void close_GDT(struct vertex ***v, int size) {
     }
     free(*v);
     *v = NULL;
+}
+
+void draw_GDT(struct vertex **v, int size) {
+    init_graph();
+    /*
+      calculate positions in the circle
+      cx and cy  are the center of terminal
+    */
+    int cx = 40, cy = 12, radio = 10, pos_x[size], pos_y[size];
+
+    for (int i = 0; i < size; i++) {
+
+        float angl = (2 * M_PI * i) / size;
+        pos_x[i] = cx + (int)(radio * 2 * cos(angl));
+        pos_y[i] = cy + (int)(radio * sin(angl));
+    }
+
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < v[i]->edge_count; j++) {
+            // find index of objetive vertex
+            for (int k = 0; k < size; k++) {
+                if (v[i]->edge[j] == v[k]) {
+                    draw_edge(pos_x[i], pos_y[i], pos_x[k], pos_y[k]);
+                    break;
+                }
+            }
+        }
+    }
+    /*draw vertex up of edges*/
+    for (int i = 0; i < size; i++) {
+        draw_circle(pos_x[i], pos_y[i], v[i]->vertex_name);
+    }
+    refresh();
+    close_grap();
 }

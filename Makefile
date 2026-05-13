@@ -1,3 +1,10 @@
+
+ifeq ($(OS), Windows_NT)
+	LIBS = -lbgi -lgdi32
+else
+	LIBS = -lncurses -lm
+endif
+
 #compilers
 CC = gcc
 CXX = g++
@@ -20,13 +27,14 @@ RS_LIB_DBG = ./output/librust_part_dbg.a
 C_OBJ = ./output/funcion.o
 CPP_OBJ = ./output/main.o
 LINK_OBJ = ./output/linker.o
+GRAPH_OBJ = ./output/make_graph.o
 
 # ─── RELEASE ───────────────────────────────────────────
 .PHONY: all
 all: clean $(TARGET)
 
-$(TARGET): $(CPP_OBJ) $(C_OBJ) $(LINK_OBJ) $(RS_LIB)
-	$(CXX) $(CPP_OBJ) $(C_OBJ) $(LINK_OBJ) $(RS_LIB) -o $(TARGET) $(LDFLAGS)
+$(TARGET): $(CPP_OBJ) $(C_OBJ) $(LINK_OBJ) $(GRAPH_OBJ) $(RS_LIB)
+	$(CXX) $(CPP_OBJ) $(C_OBJ) $(LINK_OBJ) $(GRAPH_OBJ) $(RS_LIB) -o $(TARGET) $(LDFLAGS) $(LIBS)
 
 $(RS_LIB): $(RS_SRC)
 	cargo build --release
@@ -41,14 +49,15 @@ $(C_OBJ): src/funcion.c
 $(CPP_OBJ): src/main.cpp
 	$(CXX) $(CXXFLAGS) -c src/main.cpp -o $(CPP_OBJ)
 
+$(GRAPH_OBJ): src/make_graph.c
+	$(CC) $(CFLAGS) -c src/make_graph.c -o $(GRAPH_OBJ)
+
 # ─── DEBUG ─────────────────────────────────────────────
 .PHONY: debug
-debug: clean \
-	$(RS_LIB_DBG) \
-	$(LINK_OBJ) \
-	$(C_OBJ) \
-	$(CPP_OBJ)
-	$(CXX) $(CPP_OBJ) $(C_OBJ) $(LINK_OBJ) $(RS_LIB_DBG) -o $(TARGET) $(LDFLAGS)
+debug: CFLAGS := $(CFLAGS_DBG)
+debug: CXXFLAGS := $(CXXFLAGS_DBG)
+debug: clean $(RS_LIB_DBG) $(LINK_OBJ) $(C_OBJ) $(CPP_OBJ) $(GRAPH_OBJ)
+	$(CXX) $(CPP_OBJ) $(C_OBJ) $(LINK_OBJ) $(GRAPH_OBJ) $(RS_LIB_DBG) -o $(TARGET) $(LDFLAGS) $(LIBS)
 
 $(RS_LIB_DBG): $(RS_SRC)
 	cargo build
@@ -57,5 +66,5 @@ $(RS_LIB_DBG): $(RS_SRC)
 # ─── CLEAN ─────────────────────────────────────────────
 .PHONY: clean
 clean:
-	rm -f $(RS_LIB) $(RS_LIB_DBG) $(CPP_OBJ) $(C_OBJ) $(LINK_OBJ)
+	rm -f $(RS_LIB) $(RS_LIB_DBG) $(CPP_OBJ) $(C_OBJ) $(LINK_OBJ) $(GRAPH_OBJ)
 	cargo clean

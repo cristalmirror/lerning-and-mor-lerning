@@ -5,5 +5,5 @@
 *.a
 *.lib
 
-hibirdexe
+./output/hibirdexe
 
