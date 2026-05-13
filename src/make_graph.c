@@ -1,5 +1,7 @@
 
 #include "../includes/make_graph.h"
+#include <ncurses.h>
+#include <stdlib.h>
 
 
 void init_graph() {
@@ -22,6 +24,7 @@ void close_grap() {
 #ifdef _WIN32
     closegraph();
 #else
+    getch();
     endwin();  
 #endif
 }
@@ -33,10 +36,13 @@ void draw_circle(int cx, int cy, char *name) {
 
     circle(cx, cy, 20);
     outtextxy(cx, cy, name);
+
 #else
-  attron(COLOR_PAIR(1));
-  mvprintw(cy, cx, "(%s)", name);
-  attroff(COLOR_PAIR(1));
+
+    attron(COLOR_PAIR(1));
+    mvprintw(cy, cx, "(%s)", name);
+    attroff(COLOR_PAIR(1));
+
 #endif
 }
 
@@ -47,7 +53,23 @@ void draw_edge(int x1, int y1, int x2, int y2) {
     line(x1, y1, x2, y2);
 #else
     attron(COLOR_PAIR(2));
-    mvhline(y1, x1, '-', x2 - x1);
+    // Bresenham algorithim implementation
+    int dx = abs(x2 - x1), sx = x1 < x2 ? 1 : -1;
+    int dy = abs(y2 - y1), sy = y1 < y2 ? 1 : -1;
+    int err = dx - dy;
+    while (1) {
+        mvaddch(y1, x1, '*');
+        if (x1 == x2 && y1 == y2) break;
+        int e2 = 2 * err;
+        if (e2 > -dy) {
+            err -= dy;
+            x1 += sx;
+        }
+        if (e2 < dx) {
+            err += dx;
+            y1 += sy;
+        }
+    }
     attroff(COLOR_PAIR(2));
 #endif  
   

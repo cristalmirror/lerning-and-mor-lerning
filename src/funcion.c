@@ -119,9 +119,24 @@ void graph_function(char **data_graph) {
     } else {//if is valid make the graphe
         struct vertex **vert;
         int size = 0;
+        char opt = '0';
         init_struct_GDT(&vert);
-        construction_GDT(&vert,&size,&matrix,f,c);
-        printing_GDT(vert, size);
+        construction_GDT(&vert, &size, &matrix, f, c);
+        printf("size=%d vert=%p\n", size, (void*)vert);
+        printf("Si desea graficar de forma grafica o de texto?:\n grafica > "
+               "'g' y luego intro\n texto > 't' y luego intro\n>>> ");
+        do {
+            scanf("%c",&opt);
+            if (opt == 'g') {
+                draw_GDT(vert, size);
+                break;
+            } else if (opt == 't') {
+                printing_GDT(vert, size);
+                break;              
+            } else {
+                printf("Opcion no valida, intente nuevamente\n>>");
+            }
+        }while(1);
         close_GDT(&vert,size);//free memory
     }
 
