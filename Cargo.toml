@@ -7,3 +7,11 @@ edition = "2024"
 crate-type = ["staticlib"] # Genera un archivo .a o .lib
 
 [dependencies]
+
+# ── perfil release optimizado ──────────────────────
+[profile.release]
+opt-level = "z"      # optimiza para tamaño (alternativa: 3 para velocidad)
+panic = "abort"      # elimina el unwinding runtime
+strip = true         # strip automático del binario
+lto = true           # link-time optimization, elimina código muerto
+codegen-units = 1    # un solo codegen unit, mejor optimización

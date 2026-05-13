@@ -1,49 +1,70 @@
+
+ifeq ($(OS), Windows_NT)
+	LIBS = -lbgi -lgdi32
+else
+	LIBS = -lncurses -lm
+endif
+
 #compilers
 CC = gcc
 CXX = g++
-RUSTC = rustc 
 
-#compilation flags
-CFLAGS = -Wall
-CXXFLAGS = -Wall -std=c++23
+#compilation flags — release por defecto
+CFLAGS = -Wall -O2
+CXXFLAGS = -Wall -std=c++23 -O2
+
+#debug flags
+CFLAGS_DBG = -Wall -g
+CXXFLAGS_DBG = -Wall -std=c++23 -g
+
 LDFLAGS = -lpthread -ldl
 
 #archive name
-TARGET = hibridexe
+TARGET = ./output/hibridexe
 RS_SRC = src/lib.rs
-RS_LIB = src/librust_part.a
-C_OBJ = funcion.o
-CPP_OBJ = main.o
+RS_LIB = ./output/librust_part.a
+RS_LIB_DBG = ./output/librust_part_dbg.a
+C_OBJ = ./output/funcion.o
+CPP_OBJ = ./output/main.o
+LINK_OBJ = ./output/linker.o
+GRAPH_OBJ = ./output/make_graph.o
 
-#debug options
-.PHONY: debug
-debug: CFLAGS += -g
-debug: CXXFLAGS += -g
-debug: RUST_FLAGS += -g
-debug: $(TARGET)
+# ─── RELEASE ───────────────────────────────────────────
+.PHONY: all
+all: clean $(TARGET)
 
+$(TARGET): $(CPP_OBJ) $(C_OBJ) $(LINK_OBJ) $(GRAPH_OBJ) $(RS_LIB)
+	$(CXX) $(CPP_OBJ) $(C_OBJ) $(LINK_OBJ) $(GRAPH_OBJ) $(RS_LIB) -o $(TARGET) $(LDFLAGS) $(LIBS)
 
-# executable definitions
-all: $(TARGET)
-
-
-
-#linking code
-$(TARGET): $(CPP_OBJ) $(C_OBJ) $(RS_LIB)
-	$(CXX) $(CPP_OBJ) $(C_OBJ) $(RS_LIB) -o $(TARGET) $(LDFLAGS)
-
-#compile static Rust lib
 $(RS_LIB): $(RS_SRC)
-	$(RUSTC) --crate-type=staticlib $(RS_SRC) -o $(RS_LIB)
+	cargo build --release
+	cp target/release/libexperimental.a $(RS_LIB)
 
-#compile C object 
-$(C_OBJ): funcion.c 
-	$(CC) $(CFLAGS) -c funcion.c -o $(C_OBJ)
+$(LINK_OBJ): src/linker.c
+	$(CC) $(CFLAGS) -c src/linker.c -o $(LINK_OBJ)
 
-#Compile the main object (C++)
-$(CPP_OBJ): main.cpp 
-	$(CXX) $(CXXFLAGS) -c main.cpp -o $(CPP_OBJ)
+$(C_OBJ): src/funcion.c
+	$(CC) $(CFLAGS) -c src/funcion.c -o $(C_OBJ)
 
-#archive generated cleaning
-clean: 
-	rm -f $(RS_LIB) *.o
+$(CPP_OBJ): src/main.cpp
+	$(CXX) $(CXXFLAGS) -c src/main.cpp -o $(CPP_OBJ)
+
+$(GRAPH_OBJ): src/make_graph.c
+	$(CC) $(CFLAGS) -c src/make_graph.c -o $(GRAPH_OBJ)
+
+# ─── DEBUG ─────────────────────────────────────────────
+.PHONY: debug
+debug: CFLAGS := $(CFLAGS_DBG)
+debug: CXXFLAGS := $(CXXFLAGS_DBG)
+debug: clean $(RS_LIB_DBG) $(LINK_OBJ) $(C_OBJ) $(CPP_OBJ) $(GRAPH_OBJ)
+	$(CXX) $(CPP_OBJ) $(C_OBJ) $(LINK_OBJ) $(GRAPH_OBJ) $(RS_LIB_DBG) -o $(TARGET) $(LDFLAGS) $(LIBS)
+
+$(RS_LIB_DBG): $(RS_SRC)
+	cargo build
+	cp target/debug/libexperimental.a $(RS_LIB_DBG)
+
+# ─── CLEAN ─────────────────────────────────────────────
+.PHONY: clean
+clean:
+	rm -f $(RS_LIB) $(RS_LIB_DBG) $(CPP_OBJ) $(C_OBJ) $(LINK_OBJ) $(GRAPH_OBJ)
+	cargo clean
